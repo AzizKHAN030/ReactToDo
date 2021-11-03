@@ -1,7 +1,8 @@
 import React from "react";
 import classNames from "classnames";
+import { CrossIco } from "../assets/img";
 
-export default function List({ items, isRemovable, onPopup }) {
+export default function List({ items, isRemovable, onPopup, onRemoveList }) {
   return (
     <>
       <ul className={"todo__list"} onClick={onPopup}>
@@ -20,12 +21,17 @@ export default function List({ items, isRemovable, onPopup }) {
                   <i
                     className="badge"
                     style={{
-                      background: item.color,
+                      background: item.color.hex,
                     }}
                   ></i>
                 )}
               </i>
               <span> {item.name}</span>
+              {isRemovable && (
+                <i onClick={() => onRemoveList(item)}>
+                  <CrossIco />
+                </i>
+              )}
             </li>
           );
         })}

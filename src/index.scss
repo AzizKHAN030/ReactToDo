@@ -41,6 +41,7 @@ textarea {
   border: 1px solid #f1f1f1;
   font-size: 14px;
   overflow: hidden;
+  display: flex;
 
   &__sidebar {
     background: #f4f4f4;
@@ -49,6 +50,7 @@ textarea {
     height: 100%;
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
+
   }
 
   &__list {
@@ -58,10 +60,35 @@ textarea {
       display: flex;
       align-items: center;
 
+      transition: all .2s ease-in-out;
 
       padding: 10px 12px;
       margin-bottom: 5px;
       cursor: pointer;
+
+      span {
+        flex: 1;
+      }
+
+      // span~i {
+      //   background: red;
+      // }
+
+      span~i svg {
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease-in-out;
+
+        path {
+          transition: all .2s ease-in-out;
+        }
+
+        &:hover {
+          path {
+            fill: rgb(61, 61, 61);
+          }
+        }
+      }
 
       &.active {
         background: #FFFFFF;
@@ -71,6 +98,11 @@ textarea {
 
       &:hover {
         background: rgba($color: #fff, $alpha: 0.5);
+
+        span~i svg {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
 
@@ -89,12 +121,14 @@ textarea {
 
     &-addbtn {
       color: #767676;
+      transition: all .2s ease-in-out;
 
       &:hover {
         color: #292929;
 
         svg {
           path {
+            transition: all .2s ease-in-out;
             stroke: #292929;
           }
         }
@@ -149,6 +183,10 @@ textarea {
 
         color: #FFFFFF;
 
+        &:disabled {
+          background: rgb(214, 214, 214) !important;
+        }
+
         &:hover {
           background: #25c781;
         }
@@ -179,6 +217,111 @@ textarea {
     }
 
   }
+
+  &__tasks {
+    flex: 1;
+    padding: 60px;
+    overflow-y: scroll;
+
+    h2 {
+      font-family: "Montserrat";
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 39px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f2f2f2;
+      margin-bottom: 30px;
+
+      svg {
+        transition: all .2s ease-in-out;
+        margin-left: 15px;
+        opacity: 0;
+        cursor: pointer;
+
+        path {
+          transition: all .2s ease-in-out;
+        }
+
+        &:hover {
+          path {
+
+            fill: rgb(109, 109, 109);
+          }
+        }
+      }
+
+      &:hover {
+        svg {
+          opacity: 1;
+        }
+      }
+    }
+
+
+    .tasks__items {
+      &-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .tasks__checkbox {
+          margin-right: 15px;
+
+          label {
+            transition: .2s ease-in-out;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #E8E8E8;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            svg {
+              transition: .2s ease-in-out;
+
+              opacity: 0;
+            }
+
+            &:hover {
+              background: #F2F2F2;
+              border: 2px solid #F2F2F2;
+
+              svg {
+                opacity: 1;
+              }
+            }
+          }
+
+          input {
+            display: none;
+          }
+
+          input:checked~label {
+            background: #4DD599;
+            border: 2px solid #4DD599;
+
+            svg {
+              opacity: 1;
+
+              path {
+                stroke: #fff;
+              }
+            }
+          }
+
+        }
+
+        p {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+    }
+  }
+
 }
 
 .field {

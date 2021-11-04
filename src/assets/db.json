@@ -11,11 +11,6 @@
       "colorId": 4
     },
     {
-      "id": 3,
-      "name": "Фильмы и сериалы",
-      "colorId": 3
-    },
-    {
       "id": 4,
       "name": "Книги",
       "colorId": 2
@@ -24,6 +19,12 @@
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
       "id": 7
+    },
+    {
+      "name": "Задачи",
+      "colorId": 3,
+      "tasks": [],
+      "id": 8
     }
   ],
   "tasks": [

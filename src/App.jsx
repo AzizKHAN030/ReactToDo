@@ -1,14 +1,13 @@
 import React from "react";
 import axios from "axios";
 
-import DB from "./assets/db.json";
-
 import { List, AddListButton, Tasks } from "./components";
 import { ListIco } from "./assets/img";
 
 function App() {
   const [lists, setLists] = React.useState([]);
   const [colors, setColors] = React.useState(null);
+  const [activeList, setActiveList] = React.useState(null);
   React.useEffect(() => {
     axios
       .get("http://localhost:3002/lists?_expand=color&_embed=tasks")
@@ -33,16 +32,42 @@ function App() {
     axios.delete(`http://localhost:3002/lists/${obj.id}`);
   };
 
+  const onSelectList = (item, e) => {
+    setActiveList(item);
+    // console.log(selectedList);
+  };
+
+  const onEditTitle = (listId, inputVal) => {
+    const newList = lists.map((list) => {
+      if (list.id === listId) {
+        list.name = inputVal;
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch(`http://localhost:3002/lists/${listId}`, { name: inputVal })
+      .catch(() => {
+        alert("Не удалость изменить название списка");
+      });
+  };
+
   return (
     <div className="todo">
       <div className="todo__sidebar">
+        <List items={[{ icon: <ListIco />, name: "Все задачи" }]} />
         <List
-          items={[{ icon: <ListIco />, name: "Все задачи", active: true }]}
+          items={lists}
+          isRemovable
+          onRemoveList={onRemoveList}
+          selectList={onSelectList}
+          activeList={activeList}
         />
-        <List items={lists} isRemovable onRemoveList={onRemoveList} />
         <AddListButton colors={colors} onAdd={onAddList} />
       </div>
-      {lists[0] && <Tasks list={lists[0]} />}
+      {lists && activeList && (
+        <Tasks list={activeList} editTitle={onEditTitle} />
+      )}
     </div>
   );
 }

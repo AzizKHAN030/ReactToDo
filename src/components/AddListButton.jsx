@@ -25,6 +25,7 @@ export default function AddListButton({ colors, onAdd }) {
       .post("http://localhost:3002/lists", {
         name: inputVal,
         colorId: selectedColor,
+        tasks: [],
       })
       .then(({ data }) => {
         onAdd(data);

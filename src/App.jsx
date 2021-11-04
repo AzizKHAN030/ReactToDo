@@ -52,6 +52,17 @@ function App() {
       });
   };
 
+  const onAddTask = (obj) => {
+    const newTask = lists.map((list) => {
+      if (list.id === obj.listId) {
+        list.tasks = [...list.tasks, obj];
+      }
+      return list;
+    });
+
+    setLists(newTask);
+  };
+
   return (
     <div className="todo">
       <div className="todo__sidebar">
@@ -66,7 +77,11 @@ function App() {
         <AddListButton colors={colors} onAdd={onAddList} />
       </div>
       {lists && activeList && (
-        <Tasks list={activeList} editTitle={onEditTitle} />
+        <Tasks
+          list={activeList}
+          editTitle={onEditTitle}
+          onAddTask={onAddTask}
+        />
       )}
     </div>
   );

@@ -19,18 +19,6 @@
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
       "id": 7
-    },
-    {
-      "name": "Задачи",
-      "colorId": 3,
-      "tasks": [],
-      "id": 8
-    },
-    {
-      "name": "s",
-      "colorId": 6,
-      "tasks": [],
-      "id": 9
     }
   ],
   "tasks": [
@@ -41,52 +29,16 @@
       "completed": true
     },
     {
-      "id": 2,
-      "listId": 2,
-      "text": "Изучить паттерны проектирования",
-      "completed": false
-    },
-    {
-      "id": 3,
-      "listId": 2,
-      "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
-      "completed": true
-    },
-    {
       "id": 4,
       "listId": 2,
       "text": "Redux (redux-observable, redux-saga)",
       "completed": false
     },
     {
-      "listId": 2,
-      "text": "123",
-      "completed": true,
-      "id": 5
-    },
-    {
       "listId": 1,
-      "text": "test",
+      "text": "test111",
       "completed": false,
       "id": 6
-    },
-    {
-      "listId": 1,
-      "text": "qweqwe",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "listId": 1,
-      "text": "qweqwe",
-      "completed": true,
-      "id": 8
-    },
-    {
-      "listId": 1,
-      "text": "123",
-      "completed": false,
-      "id": 9
     },
     {
       "listId": 4,
@@ -95,58 +47,52 @@
       "id": 10
     },
     {
-      "listId": 2,
-      "text": "222",
-      "completed": true,
-      "id": 12
-    },
-    {
       "listId": 7,
       "text": "Сделали сайдбар",
-      "completed": true,
+      "completed": false,
       "id": 15
     },
     {
       "listId": 7,
-      "text": "Сделали список задач",
-      "completed": true,
-      "id": 16
-    },
-    {
-      "listId": 7,
-      "text": "Сделали удаление и редактирование задач и списков",
-      "completed": true,
+      "text": "Сделали удаление и редактирование задач и списко",
+      "completed": false,
       "id": 17
     },
     {
-      "listId": 4,
-      "text": "dscds",
-      "id": 19
-    },
-    {
-      "listId": 4,
-      "text": "csdd",
-      "id": 20
+      "listId": 7,
+      "text": "errefres",
+      "id": 18,
+      "completed": false
     },
     {
       "listId": 2,
-      "text": "dscdsdcscsd",
-      "id": 25
+      "text": "dsc",
+      "id": 19,
+      "completed": true
     },
     {
-      "listId": 2,
-      "text": "Новая задача",
-      "id": 26
+      "listId": 4,
+      "text": "rev",
+      "id": 21,
+      "completed": false
     },
     {
-      "listId": 9,
-      "text": "sdcd",
-      "id": 27
+      "listId": 4,
+      "text": "dfvd",
+      "id": 22,
+      "completed": false
     },
     {
-      "listId": 9,
-      "text": "cdscds",
-      "id": 28
+      "listId": 4,
+      "text": "dsc",
+      "completed": true,
+      "id": 23
+    },
+    {
+      "listId": 4,
+      "text": "d",
+      "completed": false,
+      "id": 24
     }
   ],
   "colors": [

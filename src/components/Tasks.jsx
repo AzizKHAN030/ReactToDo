@@ -1,8 +1,15 @@
 import React from "react";
 import axios from "axios";
 
-import { PenIco, CheckIco, PlusIco } from "../assets/img";
-export default function Tasks({ list, editTitle, onAddTask }) {
+import { PenIco, CheckIco, PlusIco, CrossIco } from "../assets/img";
+export default function Tasks({
+  list,
+  editTitle,
+  onAdd,
+  onRemove,
+  onEdit,
+  onComplete,
+}) {
   const [popupTitleEdit, setPopupTitleEdit] = React.useState(false);
   const [titleInputVal, setTitleInputVal] = React.useState("");
   const [addTaskVisible, setAddTaskVisible] = React.useState(false);
@@ -18,15 +25,14 @@ export default function Tasks({ list, editTitle, onAddTask }) {
   const renderTasks = () =>
     list.tasks.map((task) => {
       return (
-        <div className="tasks__items-row" key={task.id}>
-          <div className="tasks__checkbox">
-            <input type="checkbox" name="" id={"checkbox" + task.id} />
-            <label htmlFor={"checkbox" + task.id}>
-              <CheckIco />
-            </label>
-          </div>
-          <p>{task.text}</p>
-        </div>
+        <Task
+          task={task}
+          list={list}
+          onRemove={onRemove}
+          onEdit={onEdit}
+          onComplete={onComplete}
+          key={task.id}
+        />
       );
     });
   const closeAddTaskField = () => {
@@ -36,9 +42,13 @@ export default function Tasks({ list, editTitle, onAddTask }) {
   const addTask = (list, inputVal) => {
     setIsLoading(true);
     axios
-      .post("http://localhost:3002/tasks", { listId: list, text: inputVal })
+      .post("http://localhost:3002/tasks", {
+        listId: list,
+        text: inputVal,
+        completed: false,
+      })
       .then(({ data }) => {
-        onAddTask(data);
+        onAdd(data);
       })
       .finally(() => {
         setIsLoading(false);
@@ -124,6 +134,83 @@ export default function Tasks({ list, editTitle, onAddTask }) {
             )}
           </div>
         </div>
+      </div>
+    </>
+  );
+}
+
+function Task({ task, list, onRemove, onEdit, onComplete }) {
+  const [popupTaskEdit, setPopupTaskEdit] = React.useState(false);
+  const [taskInputVal, setTaskInputVal] = React.useState(task.text);
+  const [completed, setCompleted] = React.useState(task.completed);
+
+  return (
+    <>
+      <div className="tasks__items-row">
+        <div className="tasks__checkbox">
+          <input
+            type="checkbox"
+            name=""
+            id={"checkbox" + task.id}
+            checked={task.completed}
+            onChange={(e) => {
+              setCompleted(!completed);
+              onComplete(task.id, !completed);
+            }}
+          />
+          <label htmlFor={"checkbox" + task.id}>
+            <CheckIco />
+          </label>
+        </div>
+        <p>{task.text}</p>
+        <div className="taskCtr">
+          <i
+            className="taskEdit"
+            onClick={() => setPopupTaskEdit(!popupTaskEdit)}
+          >
+            <PenIco />
+          </i>
+          <i
+            className="taskRemove"
+            onClick={() => {
+              onRemove(task.id, list.id);
+            }}
+          >
+            <CrossIco />
+          </i>
+        </div>
+        {popupTaskEdit && (
+          <div className="editBlock editTaskBlock">
+            <input
+              type="text"
+              placeholder="Новое название"
+              className="field"
+              value={taskInputVal}
+              onChange={(e) => {
+                setTaskInputVal(e.target.value);
+              }}
+            />
+            <div className="editBtns">
+              <button
+                disabled={!taskInputVal}
+                onClick={() => {
+                  onEdit(task.id, list.id, taskInputVal);
+                  setPopupTaskEdit(false);
+                }}
+              >
+                Изменить
+              </button>
+              <button
+                onClick={() => {
+                  setPopupTaskEdit(false);
+                  setTaskInputVal(task.text);
+                }}
+              >
+                Отмена
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

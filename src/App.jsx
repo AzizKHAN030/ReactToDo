@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Route, useHistory } from "react-router-dom";
 
 import { List, AddListButton, Tasks } from "./components";
 import { ListIco } from "./assets/img";
@@ -8,6 +9,8 @@ function App() {
   const [lists, setLists] = React.useState([]);
   const [colors, setColors] = React.useState(null);
   const [activeList, setActiveList] = React.useState(null);
+  const [path, setPath] = React.useState("/");
+  let history = useHistory();
   React.useEffect(() => {
     axios
       .get("http://localhost:3002/lists?_expand=color&_embed=tasks")
@@ -18,6 +21,14 @@ function App() {
       setColors(data);
     });
   }, []);
+
+  React.useEffect(() => {
+    const listId = history.location.pathname.split("/lists/")[1];
+    if (lists) {
+      const list = lists.find((list) => list.id === Number(listId));
+      setActiveList(list);
+    }
+  }, [lists, path, history.location.pathname]);
 
   const onAddList = (obj) => {
     obj.color = {
@@ -30,11 +41,14 @@ function App() {
   const onRemoveList = (obj) => {
     setLists((prev) => prev.filter((list) => list.id !== obj.id));
     axios.delete(`http://localhost:3002/lists/${obj.id}`);
+    history.goBack();
+    // history.location.pathname = "/";
+    console.log(activeList);
+    console.log(path);
   };
 
   const onSelectList = (item, e) => {
     setActiveList(item);
-    // console.log(selectedList);
   };
 
   const onEditTitle = (listId, inputVal) => {
@@ -62,6 +76,48 @@ function App() {
 
     setLists(newTask);
   };
+  const onRemoveTask = (taskId, listId) => {
+    const newList = lists.map((list) => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.filter((task) => task.id !== taskId);
+      }
+      return list;
+    });
+    setLists(newList);
+    axios.delete(`http://localhost:3002/tasks/${taskId}`);
+  };
+  const onEditTask = (taskId, listId, inputVal) => {
+    const newList = lists.map((list) => {
+      if (list.id === listId) {
+        list.tasks.map((task) => {
+          if (task.id === taskId) {
+            task.text = inputVal;
+          }
+          return list;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios.patch(`http://localhost:3002/tasks/${taskId}`, { text: inputVal });
+  };
+
+  const onCompleteTask = (taskId, status) => {
+    lists.map((list) => {
+      list.tasks.map((task) => {
+        if (task.id === taskId) {
+          task.completed = status;
+        }
+        return list;
+      });
+      return list;
+    });
+    axios
+      .patch(`http://localhost:3002/tasks/${taskId}`, { completed: status })
+      .catch(() => {
+        alert("Не удалость изменить название списка");
+      });
+  };
 
   return (
     <div className="todo">
@@ -73,16 +129,39 @@ function App() {
           onRemoveList={onRemoveList}
           selectList={onSelectList}
           activeList={activeList}
+          onClickItem={(item) => {
+            history.push(`/lists/${item.id}`);
+            setPath(history.location.pathname);
+          }}
         />
         <AddListButton colors={colors} onAdd={onAddList} />
       </div>
-      {lists && activeList && (
-        <Tasks
-          list={activeList}
-          editTitle={onEditTitle}
-          onAddTask={onAddTask}
-        />
-      )}
+      <Route exact path="/">
+        <div className="todo__tasks-block">
+          {lists &&
+            lists.map((list) => (
+              <Tasks
+                key={list.id}
+                list={list}
+                editTitle={onEditTitle}
+                onAdd={onAddTask}
+              />
+            ))}
+        </div>
+      </Route>
+
+      <Route path="/lists">
+        {lists && activeList && (
+          <Tasks
+            list={activeList}
+            editTitle={onEditTitle}
+            onAdd={onAddTask}
+            onRemove={onRemoveTask}
+            onEdit={onEditTask}
+            onComplete={onCompleteTask}
+          />
+        )}
+      </Route>
     </div>
   );
 }

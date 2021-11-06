@@ -33,9 +33,9 @@ textarea {
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   max-width: 1050px;
-  width: 100%;
-  max-height: 680px;
-  height: 100%;
+  width: calc(100vw - 100px);
+  height: calc(100vh - 100px);
+
   box-shadow: 1px 2px 20px #f3f3f3;
   border-radius: 20px;
   border: 1px solid #f1f1f1;
@@ -50,7 +50,6 @@ textarea {
     height: 100%;
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
-
   }
 
   &__list {
@@ -220,6 +219,15 @@ textarea {
 
   }
 
+  &__tasks-block {
+    overflow: auto;
+    flex: 1;
+
+    h3 {
+      display: none;
+    }
+  }
+
   &__tasks {
     flex: 1;
     padding: 60px;
@@ -337,6 +345,7 @@ textarea {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+        position: relative;
 
         .tasks__checkbox {
           margin-right: 15px;
@@ -391,6 +400,60 @@ textarea {
           font-weight: 500;
           font-size: 16px;
           line-height: 19px;
+          flex: 1;
+        }
+
+        &:hover {
+          .taskCtr {
+            i {
+              opacity: 0.7;
+            }
+          }
+        }
+
+        .taskCtr {
+          display: flex;
+          align-items: center;
+
+
+          i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 25px;
+            width: 25px;
+            background: rgb(219, 219, 219);
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all .2s ease-in-out;
+
+            svg {
+              path {
+                fill: #636363;
+              }
+            }
+
+            &:hover {
+              opacity: 1;
+
+              &:nth-of-type(1) {
+                background: rgb(255, 187, 2);
+              }
+
+              &:nth-of-type(2) {
+                background: #ce2e51;
+
+                svg {
+                  path {
+                    fill: #fff;
+                  }
+                }
+              }
+
+            }
+          }
         }
       }
 
@@ -442,6 +505,7 @@ textarea {
                 &:hover {
                   background: #25c781;
                 }
+
                 &:disabled {
                   background: rgb(214, 214, 214) !important;
                 }
@@ -459,6 +523,12 @@ textarea {
           }
 
         }
+      }
+
+      .editTaskBlock {
+        top: -20px;
+        right: 0px;
+        width: 70%;
       }
     }
   }

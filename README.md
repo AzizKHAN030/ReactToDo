@@ -1,3 +1,5 @@
+# For Demo open link on your computer, unfortunately adaptation is not available for now, <a href="https://khann-todo.vercel.app/">Todo app vercel</a>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

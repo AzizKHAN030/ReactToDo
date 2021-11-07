@@ -2,7 +2,7 @@
   "lists": [
     {
       "id": 1,
-      "name": "Продажи",
+      "name": "Продажи в Roselips Cosmetics",
       "colorId": 5
     },
     {
@@ -19,80 +19,152 @@
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
       "id": 7
+    },
+    {
+      "name": "Универ",
+      "colorId": 3,
+      "tasks": [],
+      "id": 8
     }
   ],
   "tasks": [
     {
-      "id": 1,
-      "listId": 2,
-      "text": "Изучить JavaScript",
-      "completed": true
-    },
-    {
-      "id": 4,
-      "listId": 2,
-      "text": "Redux (redux-observable, redux-saga)",
-      "completed": false
+      "listId": 1,
+      "text": "Продать Роллер для лица",
+      "completed": true,
+      "id": 27
     },
     {
       "listId": 1,
-      "text": "test111",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "listId": 4,
-      "text": "Купить 1984!",
+      "text": "Продать тоналку Gabrini, тени Hudabeuty и карандаш misstais",
       "completed": true,
-      "id": 10
-    },
-    {
-      "listId": 7,
-      "text": "Сделали сайдбар",
-      "completed": false,
-      "id": 15
-    },
-    {
-      "listId": 7,
-      "text": "Сделали удаление и редактирование задач и списко",
-      "completed": false,
-      "id": 17
-    },
-    {
-      "listId": 7,
-      "text": "errefres",
-      "id": 18,
-      "completed": false
+      "id": 28
     },
     {
       "listId": 2,
-      "text": "dsc",
-      "id": 19,
-      "completed": true
-    },
-    {
-      "listId": 4,
-      "text": "rev",
-      "id": 21,
-      "completed": false
-    },
-    {
-      "listId": 4,
-      "text": "dfvd",
-      "id": 22,
-      "completed": false
-    },
-    {
-      "listId": 4,
-      "text": "dsc",
+      "text": "Изучить HTML, CSS и вёрстку",
       "completed": true,
-      "id": 23
+      "id": 29
+    },
+    {
+      "listId": 2,
+      "text": "Изучить JavaScript",
+      "completed": true,
+      "id": 30
+    },
+    {
+      "listId": 2,
+      "text": "Изучить препроцессоры и сборщики",
+      "completed": true,
+      "id": 31
+    },
+    {
+      "listId": 2,
+      "text": "Изучить PHP и CMS Wordpress",
+      "completed": true,
+      "id": 32
+    },
+    {
+      "listId": 2,
+      "text": "Изучить ReactJS",
+      "completed": true,
+      "id": 33
+    },
+    {
+      "listId": 2,
+      "text": "Изучить Redux",
+      "completed": false,
+      "id": 34
     },
     {
       "listId": 4,
-      "text": "d",
+      "text": "Прочитать \"Бегущий за ветром\"",
+      "completed": true,
+      "id": 35
+    },
+    {
+      "listId": 4,
+      "text": "Прочитать \"Тысяча сияющих солнц\"",
+      "completed": true,
+      "id": 36
+    },
+    {
+      "listId": 4,
+      "text": "Прочитать \"И эхо летит по горам\"",
       "completed": false,
-      "id": 24
+      "id": 37
+    },
+    {
+      "listId": 4,
+      "text": "Прочитать \"Гарри Поттер Заклятое Дитя\"",
+      "completed": true,
+      "id": 38
+    },
+    {
+      "listId": 7,
+      "text": "Сделать Сайдбар и рендерить списки",
+      "completed": true,
+      "id": 39
+    },
+    {
+      "listId": 7,
+      "text": "Сделать добавление новых списков",
+      "completed": true,
+      "id": 40
+    },
+    {
+      "listId": 7,
+      "text": "Сделать рендеринг самих задач",
+      "completed": true,
+      "id": 41
+    },
+    {
+      "listId": 7,
+      "text": "Сделать удаление списков",
+      "completed": true,
+      "id": 42
+    },
+    {
+      "listId": 7,
+      "text": "Реализовать удаление задач",
+      "completed": true,
+      "id": 43
+    },
+    {
+      "listId": 7,
+      "text": "Реализовать редактирование названий списков и задач",
+      "completed": true,
+      "id": 44
+    },
+    {
+      "listId": 8,
+      "text": "Сдать все 8 лаб.работ по комп.сетям",
+      "completed": true,
+      "id": 45
+    },
+    {
+      "listId": 8,
+      "text": "Сдать 1 самостоятельную работу по человеко-машинному взаимодействию",
+      "completed": true,
+      "id": 46
+    },
+    {
+      "listId": 8,
+      "text": "Сдать 2 самостоятельную работу по человеко-машинному взаимодействию",
+      "completed": false,
+      "id": 47
+    },
+    {
+      "listId": 8,
+      "text": "Сдать 1 самостоятельную работу по проектированию программных обеспечений",
+      "completed": true,
+      "id": 48
+    },
+    {
+      "listId": 8,
+      "text": "Сдать проект по человеко-машинному взаимодействию",
+      "completed": false,
+      "id": 49
     }
   ],
   "colors": [

@@ -18,7 +18,9 @@ export default function List({
             return (
               <li
                 className={classNames(item.className, {
-                  active: activeList && item.id === activeList.id,
+                  active: activeList
+                    ? item.id === activeList.id
+                    : item.all === null,
                 })}
                 key={idx}
                 onClick={(e) => {

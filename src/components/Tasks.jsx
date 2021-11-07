@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { PenIco, CheckIco, PlusIco, CrossIco } from "../assets/img";
 export default function Tasks({
@@ -9,6 +10,7 @@ export default function Tasks({
   onRemove,
   onEdit,
   onComplete,
+  setPath,
 }) {
   const [popupTitleEdit, setPopupTitleEdit] = React.useState(false);
   const [titleInputVal, setTitleInputVal] = React.useState("");
@@ -59,14 +61,21 @@ export default function Tasks({
     <>
       <div className="todo__tasks">
         <h2 style={{ color: list.color.hex }}>
-          {list.name}
-          <i
+          <Link
+            to={`/lists/${list.id}`}
             onClick={() => {
-              setPopupTitleEdit(!popupTitleEdit);
+              setPath && setPath(`/lists/${list.id}`);
             }}
           >
-            <PenIco />
-          </i>
+            {list.name}
+            <i
+              onClick={() => {
+                setPopupTitleEdit(!popupTitleEdit);
+              }}
+            >
+              <PenIco />
+            </i>
+          </Link>
         </h2>
         {popupTitleEdit && (
           <div className="editBlock">

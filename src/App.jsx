@@ -21,12 +21,11 @@ function App() {
       setColors(data);
     });
   }, []);
-
   React.useEffect(() => {
     const listId = history.location.pathname.split("/lists/")[1];
     if (lists) {
       const list = lists.find((list) => list.id === Number(listId));
-      setActiveList(list);
+      list ? setActiveList(list) : setActiveList(null);
     }
   }, [lists, path, history.location.pathname]);
 
@@ -41,14 +40,7 @@ function App() {
   const onRemoveList = (obj) => {
     setLists((prev) => prev.filter((list) => list.id !== obj.id));
     axios.delete(`http://localhost:3002/lists/${obj.id}`);
-    history.goBack();
-    // history.location.pathname = "/";
-    console.log(activeList);
-    console.log(path);
-  };
-
-  const onSelectList = (item, e) => {
-    setActiveList(item);
+    // history.goBack();
   };
 
   const onEditTitle = (listId, inputVal) => {
@@ -118,16 +110,22 @@ function App() {
         alert("Не удалость изменить название списка");
       });
   };
-
   return (
     <div className="todo">
       <div className="todo__sidebar">
-        <List items={[{ icon: <ListIco />, name: "Все задачи" }]} />
+        <List
+          items={[{ icon: <ListIco />, name: "Все задачи", all: activeList }]}
+          onRemoveList={onRemoveList}
+          activeList={activeList}
+          onClickItem={() => {
+            history.push("/");
+            setPath(history.location.pathname);
+          }}
+        />
         <List
           items={lists}
           isRemovable
           onRemoveList={onRemoveList}
-          selectList={onSelectList}
           activeList={activeList}
           onClickItem={(item) => {
             history.push(`/lists/${item.id}`);
@@ -145,12 +143,16 @@ function App() {
                 list={list}
                 editTitle={onEditTitle}
                 onAdd={onAddTask}
+                onRemove={onRemoveTask}
+                onEdit={onEditTask}
+                onComplete={onCompleteTask}
+                setPath={setPath}
               />
             ))}
         </div>
       </Route>
 
-      <Route path="/lists">
+      <Route path="/lists/:id">
         {lists && activeList && (
           <Tasks
             list={activeList}

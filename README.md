@@ -1,4 +1,4 @@
-# For Demo open link on your computer, unfortunately adaptation is not available for now, <a href="https://khann-todo.vercel.app/">Todo app vercel</a>
+# For "Backend" run script npm run fake-server with free 3002 port
 
 # Getting Started with Create React App
 
